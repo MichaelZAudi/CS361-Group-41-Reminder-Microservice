@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timed Reminder</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#AFE1AF; margin:0; padding:0; }
+    main { max-width:600px; margin:40px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 0 8px rgba(0,0,0,0.1); }
+    label { display:block; margin-top:10px; }
+    input, button { width:100%; padding:8px; margin-top:5px; font-size:1rem; }
+    button { background:#0078d7; color:white; border:none; border-radius:5px; cursor:pointer; }
+    button:hover { background:#005fa3; }
+    .clear-btn { background:#b30000; }
+    .clear-btn:hover { background:#800000; }
+    pre { background:#eee; padding:10px; border-radius:5px; }
+  </style>
+</head>
+<body>
+  <nav style="background-color:#0078d7; padding:10px; text-align:center;">
+    <a href="index.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Home</a>
+    <a href="timed.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Timed</a>
+    <a href="event.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Event</a>
+    <a href="recurring.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Recurring</a>
+  </nav>
+
+  <main>
+    <h1>Timed Reminder</h1>
+    <p>Set a reminder that will notify you after a specific number of seconds by
+       simply entering your message and how long you want to wait, and then the reminder will trigger once the time is up.</p>
+
+    <form id="timedForm">
+      <label for="timedMsg">Message</label>
+      <input id="timedMsg" required placeholder="Enter your reminder message" />
+
+      <label for="timedSeconds">Seconds</label>
+      <input id="timedSeconds" type="number" min="1" required placeholder="Enter time in seconds" />
+
+      <button type="submit">Create Timed Reminder</button>
+      <button type="button" class="clear-btn" id="clearBtn">Clear Fields</button>
+    </form>
+
+    <pre id="output">Waiting for input...</pre>
+  </main>
+
+  <script>
+    async function postData(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    }
+
+    document.getElementById('timedForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = document.getElementById('timedMsg').value;
+      const seconds = parseInt(document.getElementById('timedSeconds').value);
+      const result = await postData('/reminders', { message, seconds });
+      document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      if (confirm('This will clear all text boxes. Do you want to continue?')) {
+        document.getElementById('timedMsg').value = '';
+        document.getElementById('timedSeconds').value = '';
+        document.getElementById('output').textContent = 'Fields cleared.';
+      }
+    });
+  </script>
+</body>
+</html>

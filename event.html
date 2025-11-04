@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Reminder</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#AFE1AF; margin:0; padding:0; }
+    main { max-width:600px; margin:40px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 0 8px rgba(0,0,0,0.1); }
+    label { display:block; margin-top:10px; }
+    input, button { width:100%; padding:8px; margin-top:5px; font-size:1rem; }
+    button { background:#0078d7; color:white; border:none; border-radius:5px; cursor:pointer; }
+    button:hover { background:#005fa3; }
+    .clear-btn { background:#b30000; }
+    .clear-btn:hover { background:#800000; }
+    pre { background:#eee; padding:10px; border-radius:5px; }
+  </style>
+</head>
+<body>
+  <nav style="background-color:#0078d7; padding:10px; text-align:center;">
+    <a href="index.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Home</a>
+    <a href="timed.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Timed</a>
+    <a href="event.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Event</a>
+    <a href="recurring.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Recurring</a>
+  </nav>
+
+  <main>
+    <h1>Event Reminder</h1>
+    <p>Create reminders that activate when a specific event occurs.
+       Create a reminder for any named event and trigger it manually below to simulate that event happening.</p>
+
+    <form id="eventForm">
+      <label for="eventMsg">Message</label>
+      <input id="eventMsg" required placeholder="Enter your reminder message" />
+
+      <label for="eventName">Event Name</label>
+      <input id="eventName" required placeholder="Enter the event name" />
+
+      <button type="submit">Create Event Reminder</button>
+      <button type="button" class="clear-btn" id="clearBtnEvent">Clear Fields</button>
+    </form>
+
+    <h2>Trigger Event</h2>
+    <form id="triggerForm">
+      <label for="triggerName">Event Name to Trigger</label>
+      <input id="triggerName" required placeholder="Enter the event name to trigger" />
+      <button type="submit">Trigger Event</button>
+    </form>
+
+    <pre id="output">Waiting for input...</pre>
+  </main>
+
+  <script>
+    async function postData(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    }
+
+    document.getElementById('eventForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = document.getElementById('eventMsg').value;
+      const eventName = document.getElementById('eventName').value;
+      const result = await postData('/reminders/event', { message, eventName });
+      document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+    });
+
+    document.getElementById('triggerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const eventName = document.getElementById('triggerName').value;
+      const response = await fetch(`/events/${eventName}`, { method: 'POST' });
+      const result = await response.json();
+      document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+    });
+
+    document.getElementById('clearBtnEvent').addEventListener('click', () => {
+      if (confirm('This will clear all text boxes. Do you want to continue?')) {
+        document.getElementById('eventMsg').value = '';
+        document.getElementById('eventName').value = '';
+        document.getElementById('triggerName').value = '';
+        document.getElementById('output').textContent = 'Fields cleared.';
+      }
+    });
+  </script>
+</body>
+</html>

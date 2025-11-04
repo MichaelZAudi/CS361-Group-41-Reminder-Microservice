@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1762213646734,
+    "message": "Stretch your back",
+    "seconds": 10,
+    "createdAt": "2025-11-03T23:47:26.734Z",
+    "fired": true
+  },
+  {
+    "id": 1762214122850,
+    "type": "event",
+    "message": "Meeting starting soon",
+    "eventName": "meeting",
+    "createdAt": "2025-11-03T23:55:22.850Z",
+    "fired": true
+  },
+  {
+    "id": 1762214280823,
+    "type": "event",
+    "message": "Take a water break",
+    "eventName": "hydration",
+    "createdAt": "2025-11-03T23:58:00.823Z",
+    "fired": true
+  },
+  {
+    "id": 1762215457843,
+    "type": "recurring",
+    "message": "Time for a 5-second check-in!",
+    "interval": 5,
+    "intervalSeconds": 5,
+    "totalRecurrences": 3,
+    "remainingRecurrences": 3,
+    "createdAt": "2025-11-04T00:17:37.843Z",
+    "nextTrigger": 1762229553362,
+    "fired": false
+  },
+  {
+    "id": 1762215608555,
+    "type": "event",
+    "message": "Meeting starting soon",
+    "eventName": "meeting",
+    "createdAt": "2025-11-04T00:20:08.555Z",
+    "fired": true
+  },
+  {
+    "id": 1762229453800,
+    "type": "recurring",
+    "message": "Posture check!",
+    "intervalSeconds": 5,
+    "nextTrigger": 1762229553363,
+    "createdAt": "2025-11-04T04:10:53.800Z",
+    "fired": false
+  },
+  {
+    "id": 1762231516122,
+    "type": "recurring",
+    "message": "Check your schedule for today",
+    "interval": "daily",
+    "duration_seconds": 5,
+    "recurrences": 3,
+    "remaining": 0,
+    "nextTrigger": 1762231536126,
+    "createdAt": "2025-11-04T04:45:16.122Z",
+    "fired": false
+  },
+  {
+    "id": 1762231777487,
+    "message": "Hello ",
+    "seconds": 3,
+    "createdAt": "2025-11-04T04:49:37.487Z",
+    "fired": true
+  },
+  {
+    "id": 1762231786671,
+    "message": "Hello ",
+    "seconds": 10,
+    "createdAt": "2025-11-04T04:49:46.671Z",
+    "fired": true
+  },
+  {
+    "id": 1762231838722,
+    "type": "event",
+    "message": "Complete Task",
+    "eventName": "Task1",
+    "createdAt": "2025-11-04T04:50:38.722Z",
+    "fired": false
+  },
+  {
+    "id": 1762231873854,
+    "type": "recurring",
+    "message": "Do your homework",
+    "interval": "custom",
+    "duration_seconds": 5,
+    "recurrences": 3,
+    "remaining": 0,
+    "nextTrigger": 1762231893859,
+    "createdAt": "2025-11-04T04:51:13.854Z",
+    "fired": false
+  },
+  {
+    "id": 1762233267755,
+    "message": "Stretch my back",
+    "seconds": 5,
+    "createdAt": "2025-11-04T05:14:27.755Z",
+    "fired": true
+  },
+  {
+    "id": 1762233467204,
+    "type": "event",
+    "message": "Complete Task",
+    "eventName": "Task",
+    "createdAt": "2025-11-04T05:17:47.204Z",
+    "fired": true
+  },
+  {
+    "id": 1762233523753,
+    "type": "event",
+    "message": "Complete Task",
+    "eventName": "Task",
+    "createdAt": "2025-11-04T05:18:43.753Z",
+    "fired": true
+  },
+  {
+    "id": 1762233545337,
+    "type": "event",
+    "message": "Meeting starting soon.",
+    "eventName": "meeting",
+    "createdAt": "2025-11-04T05:19:05.337Z",
+    "fired": true
+  },
+  {
+    "id": 1762236588560,
+    "message": "Stretch my back",
+    "seconds": 3,
+    "createdAt": "2025-11-04T06:09:48.560Z",
+    "fired": true
+  },
+  {
+    "id": 1762237745954,
+    "message": "Stretch my back",
+    "seconds": 5,
+    "createdAt": "2025-11-04T06:29:05.954Z",
+    "fired": true
+  },
+  {
+    "id": 1762237792183,
+    "type": "event",
+    "message": "Complete Task",
+    "eventName": "Task",
+    "createdAt": "2025-11-04T06:29:52.183Z",
+    "fired": true
+  },
+  {
+    "id": 1762237850731,
+    "type": "recurring",
+    "message": "Do your homework",
+    "interval": "custom",
+    "duration_seconds": 20,
+    "recurrences": 3,
+    "remaining": 0,
+    "nextTrigger": 1762237930733,
+    "createdAt": "2025-11-04T06:30:50.731Z",
+    "fired": false
+  }
+]

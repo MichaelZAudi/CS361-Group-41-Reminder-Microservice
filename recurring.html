@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recurring Reminder</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#AFE1AF; margin:0; padding:0; }
+    main { max-width:600px; margin:40px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 0 8px rgba(0,0,0,0.1); }
+    label { display:block; margin-top:10px; }
+    input, button { width:100%; padding:8px; margin-top:5px; font-size:1rem; }
+    button { background:#0078d7; color:white; border:none; border-radius:5px; cursor:pointer; }
+    button:hover { background:#005fa3; }
+    .clear-btn { background:#b30000; }
+    .clear-btn:hover { background:#800000; }
+    pre { background:#eee; padding:10px; border-radius:5px; }
+  </style>
+</head>
+<body>
+  <nav style="background-color:#0078d7; padding:10px; text-align:center;">
+    <a href="index.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Home</a>
+    <a href="timed.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Timed</a>
+    <a href="event.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Event</a>
+    <a href="recurring.html" style="color:white; margin:0 15px; text-decoration:none; font-weight:bold;">Recurring</a>
+  </nav>
+
+  <main>
+    <h1>Recurring Reminder</h1>
+    <p>Create reminders that repeat automatically for a set number of times.
+       You can specify how many times the reminder should repeat and how long to wait between each one.</p>
+
+    <form id="recurringForm">
+      <label for="recMsg">Message</label>
+      <input id="recMsg" required placeholder="Enter your reminder message" />
+
+      <label for="recSeconds">Duration</label>
+      <input id="recSeconds" type="number" min="1" required placeholder="Enter the number of time between reminders" />
+
+      <label for="recCount">Recurrences</label>
+      <input id="recCount" type="number" min="1" required placeholder="Enter how many times it should repeat" />
+
+      <button type="submit">Create Recurring Reminder</button>
+      <button type="button" class="clear-btn" id="clearBtnRec">Clear Fields</button>
+    </form>
+
+    <pre id="output">Waiting for input...</pre>
+  </main>
+
+  <script>
+    async function postData(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    }
+
+    document.getElementById('recurringForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = document.getElementById('recMsg').value;
+      const duration_seconds = parseInt(document.getElementById('recSeconds').value);
+      const recurrences = parseInt(document.getElementById('recCount').value);
+      const result = await postData('/reminders/recurring', { message, duration_seconds, recurrences });
+      document.getElementById('output').textContent = JSON.stringify(result, null, 2);
+    });
+
+    document.getElementById('clearBtnRec').addEventListener('click', () => {
+      if (confirm('This will clear all text boxes. Do you want to continue?')) {
+        document.getElementById('recMsg').value = '';
+        document.getElementById('recSeconds').value = '';
+        document.getElementById('recCount').value = '';
+        document.getElementById('output').textContent = 'Fields cleared.';
+      }
+    });
+  </script>
+</body>
+</html>
