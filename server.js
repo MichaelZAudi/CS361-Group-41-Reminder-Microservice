@@ -182,6 +182,23 @@ function initRecurringReminders() {
   });
 }
 
+app.get('/reminders/:id/status', (req, res) => {
+  const id = req.params.id;
+  const reminder = reminders.find(r => r.id === id);
+
+  // If not found
+  if (!reminder) {
+    return res.json({ status: "error", message: "Reminder not found" });
+  }
+
+  // Return status info
+  res.json({
+    id: reminder.id,
+    type: reminder.type,
+    completed: reminder.completed,
+    message: reminder.message
+  });
+});
 
 // Start the server
 app.listen(PORT, () => {
