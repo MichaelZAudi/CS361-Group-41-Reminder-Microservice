@@ -44,5 +44,8 @@ package-lock.json
 package.json
 server.js
 
+## UML sequence diagram:
+![UML Diagram Reminder Microservice](UML_diagram_reminder_microservice.png)
+
 # Version
 Milestone 1 - v1
